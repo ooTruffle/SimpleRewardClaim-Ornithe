@@ -1,0 +1,30 @@
+package com.ootruffle.simplerewardclaim.types;
+
+public enum GameMode {
+    BEDWARS,
+    SKYWARS,
+    PROTOTYPE,
+    SKYBLOCK,
+    MAIN,
+    MURDER_MYSTERY,
+    HOUSING,
+    ARCADE,
+    BUILD_BATTLE,
+    DUELS,
+    PIT,
+    UHC,
+    SPEED_UHC,
+    TNTGAMES,
+    LEGACY,
+    QUAKECRAFT,
+    WALLS,
+    PAINTBALL,
+    VAMPIREZ,
+    ARENA,
+    GINGERBREAD,
+    MCGO,
+    SURVIVAL_GAMES,
+    WALLS3,
+    SUPER_SMASH,
+    BATTLEGROUND
+}
