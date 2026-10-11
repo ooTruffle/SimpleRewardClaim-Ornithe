@@ -1,7 +1,7 @@
 mod.id = "simplerewardclaim"
 mod.name = "SimpleRewardClaim"
 mod.group = "com.ootruffle"
-mod.version = "1.1.0"
+mod.version = "1.1.1"
 
 deps.fabric_loader = "0.19.3"
 deps.oneconfig = "1.1.12"

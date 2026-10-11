@@ -13,7 +13,7 @@ import java.net.URI;
  * /claim selftest [net]
  *
  * Runs each stage of the mod on fake data and prints PASS / FAIL for it:
- *   1. link detection (the chat regexes)
+ *   1. link detection (the chat regexes and the book NBT)
  *   2. book screen detection (class name matching)
  *   3. reward page parsing (the same code the real fetch uses)
  *   4. showing the clickable buttons, with a debug session so claiming sends nothing
@@ -74,6 +74,20 @@ public final class SelfTest {
 
         id = SimpleRewardClaim.matchRewardId("[VIP] someone: salmon smells good bro");
         step("Ignores ordinary chat messages", id == null, "got " + id);
+
+        // What the book's NBT looks like as text: each page is a JSON string, so its quotes are escaped.
+        String book = "{pages:[0:\"{\\\"text\\\":\\\"Claim\\\",\\\"clickEvent\\\":{\\\"action\\\":\\\"open_url\\\","
+                + "\\\"value\\\":\\\"https://rewards.hypixel.net/claim-reward/Qw3Er5Ty\\\"}}\"],title:\"Daily Reward\"}";
+        id = SimpleRewardClaim.matchBookRewardId(book);
+        step("Detects the reward link inside the book", "Qw3Er5Ty".equals(id), "got " + id);
+
+        id = SimpleRewardClaim.matchBookRewardId("{value:\"https:\\/\\/rewards.hypixel.net\\/claim-reward\\/Ab12Cd34\"}");
+        step("Detects a book link with escaped slashes", "Ab12Cd34".equals(id), "got " + id);
+
+        // The format Hypixel actually sends (October 2026): no "rewards." subdomain, escaped slashes.
+        id = SimpleRewardClaim.matchBookRewardId("\\\"clickEvent\\\":{\\\"action\\\":\\\"open_url\\\","
+                + "\\\"value\\\":\\\"https:\\/\\/hypixel.net\\/claim-reward\\/e831c683\\\"}");
+        step("Detects the current hypixel.net book link", "e831c683".equals(id), "got " + id);
     }
 
     // ---- 2 ----

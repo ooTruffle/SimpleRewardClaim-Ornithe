@@ -54,6 +54,14 @@ final class Debug {
         }
     }
 
+    /** Logs the raw NBT of a book being opened, to see where Hypixel puts the claim link. */
+    static void bookContents(String source, String contents, String id) {
+        SimpleRewardClaim.LOGGER.info("Book (" + source + "): " + contents + " -> id " + id);
+        if (logScreens) {
+            Utils.chat(Formatting.GRAY + "[RewardClaim] Book (" + source + ") -> id " + id + ", full NBT in the log");
+        }
+    }
+
     static void linkDetected(String id) {
         SimpleRewardClaim.LOGGER.info("Reward link detected (id " + id + ")");
         if (logScreens) {

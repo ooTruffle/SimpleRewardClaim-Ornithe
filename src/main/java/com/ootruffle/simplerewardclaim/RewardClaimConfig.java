@@ -15,7 +15,7 @@ public class RewardClaimConfig extends Config {
 
     @Switch(
             title = "Hide reward book",
-            description = "Stops the book that Hypixel opens alongside the reward link from showing."
+            description = "Stops the daily reward book from showing. The mod still reads the claim link from it."
     )
     public boolean hideBook = true;
 
